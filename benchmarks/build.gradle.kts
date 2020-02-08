@@ -15,16 +15,13 @@ dependencies {
 }
 
 tasks {
-    withType<Test> {
-        useJUnitPlatform()
-    }
 
     register("jmh", type=JavaExec::class) {
-        dependsOn("classes")
+        dependsOn(":lib:assemble")
         group = "benchmark"
         main = "org.openjdk.jmh.Main"
         classpath = sourceSets["main"].runtimeClasspath
         // To pass parameters ("-h" gives a list of possible parameters)
-        args(listOf("-h"))
+        args(listOf("-rf", "json", "-rff", "output.json"))
     }
 }

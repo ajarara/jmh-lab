@@ -1,2 +1,2 @@
-group = "org.example"
+group = "io.ajarara"
 version = "1.0-SNAPSHOT"
