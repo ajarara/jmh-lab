@@ -23,4 +23,11 @@ internal class PruferTest {
         assertTrue(wikipedia[4] == setOf(3, 5))
         assertTrue(wikipedia[5] == setOf(4))
     }
+
+    @Test
+    fun `large linked list prufer`() {
+        val large = Prufer.of(List(10_000) { it })
+
+        large.forEach { assertTrue(it.size <= 2) }
+    }
 }
