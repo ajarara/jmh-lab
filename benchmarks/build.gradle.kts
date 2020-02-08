@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    kotlin("jvm") version "1.3.61"
 }
 
 repositories {
@@ -8,11 +9,17 @@ repositories {
 
 dependencies {
     implementation("org.openjdk.jmh:jmh-core:1.21")
+    implementation(kotlin("stdlib-jdk8"))
     annotationProcessor("org.openjdk.jmh:jmh-generator-annprocess:1.21")
+    testCompile("org.junit.jupiter:junit-jupiter:5.6.0")
 }
 
 tasks {
-    register("jmh", type=JavaExec::class.java) {
+    withType<Test> {
+        useJUnitPlatform()
+    }
+
+    register("jmh", type=JavaExec::class) {
         dependsOn("classes")
         group = "benchmark"
         main = "org.openjdk.jmh.Main"
